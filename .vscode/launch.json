@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args":[
+                "--print_on_screen",
+                "--cuda","--do_train",
+                "-b","128",
+                "-n","10",
+                "-adv",
+                "--dataset","fb15k-237",
+                "--model", "TripleRE",
+                "-lr", "0.0005",
+                "--valid_steps", "1000",
+                "--log_steps", "1000",
+                "--max_steps", "100000",
+                "--do_valid", 
+                "--gamma", "6.0",
+                "-randomSeed", "0",
+                "-a", "2",
+                "--drop", "0.05",
+                "--true_negative",
+                "-u", "1",
+                "--anchor_size", "1",
+                "-ancs" ,"20",
+                "-d", "512" ,
+                "-path",
+                "--head_dim", "8",
+                "--mlp_ratio", "2" ,
+                "-skip" ,"0.2",
+
+                
+                 ]
+
+        }
+    ]
+}

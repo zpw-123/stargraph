@@ -1,0 +1,44 @@
+2023-02-17 02:16:43 INFO     Random seed: 0
+2023-02-17 02:16:46 INFO     Saving: log/fb15k-237/TripleRE/16-6.0/1676600203.6318688
+2023-02-17 02:16:46 INFO     Model: TripleRE
+2023-02-17 02:16:46 INFO     Dataset: fb15k-237
+2023-02-17 02:16:46 INFO     #entity: 14505
+2023-02-17 02:16:46 INFO     #relation: 237
+2023-02-17 02:16:46 INFO     #train: 272115
+2023-02-17 02:16:46 INFO     #valid: 17526
+2023-02-17 02:16:46 INFO     #test: 20438
+2023-02-17 02:16:49 INFO     Model Parameter Configuration:
+2023-02-17 02:16:49 INFO     Parameter gamma: torch.Size([1]), require_grad = False
+2023-02-17 02:16:49 INFO     Parameter embedding_range: torch.Size([1]), require_grad = False
+2023-02-17 02:16:49 INFO     Parameter relation_embedding.weight: torch.Size([237, 48]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter anchor_embedding.weight: torch.Size([2305, 16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.norm1.weight: torch.Size([16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.norm1.bias: torch.Size([16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.norm2.weight: torch.Size([16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.norm2.bias: torch.Size([16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.attn.qk.weight: torch.Size([128, 16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.mlp.linear1.weight: torch.Size([32, 16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.mlp.linear1.bias: torch.Size([32]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.mlp.linear2.weight: torch.Size([16, 32]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter attn_layers.0.mlp.linear2.bias: torch.Size([16]), require_grad = True
+2023-02-17 02:16:49 INFO     Parameter path_embeddings.weight: torch.Size([475, 32]), require_grad = True
+2023-02-17 02:16:49 INFO     Total number of params: 66642
+2023-02-17 02:16:50 INFO     Ramdomly Initializing TripleRE Model...
+2023-02-17 02:16:50 INFO     Calculating sample weights...
+2023-02-17 02:16:53 INFO     Creating train dataloader...
+2023-02-17 02:17:00 INFO     Using cached matrix: /home/zpw/StarGraph/cached_matrices/matrix_fb15k-237_k3_nrw1000.npz
+2023-02-17 02:17:08 INFO     Using cached matrix: /home/zpw/StarGraph/cached_matrices/matrix_fb15k-237_k3_nrw1000.npz
+2023-02-17 02:17:09 INFO     Start Training...
+2023-02-17 02:17:09 INFO     init_step = 0
+2023-02-17 02:17:09 INFO     batch_size = 8
+2023-02-17 02:17:09 INFO     negative_adversarial_sampling = 1
+2023-02-17 02:17:09 INFO     hidden_dim = 16
+2023-02-17 02:17:09 INFO     gamma = 6.000000
+2023-02-17 02:17:09 INFO     negative_adversarial_sampling = True
+2023-02-17 02:17:09 INFO     adversarial_temperature = 2.000000
+2023-02-17 02:17:09 INFO     learning_rate = 0
+2023-02-17 02:18:29 INFO     
+
+2023-02-17 02:18:29 INFO     Train positive_sample_loss at step 0: 1.008896
+2023-02-17 02:18:29 INFO     Train negative_sample_loss at step 0: 0.953164
+2023-02-17 02:18:29 INFO     Train loss at step 0: 0.981030

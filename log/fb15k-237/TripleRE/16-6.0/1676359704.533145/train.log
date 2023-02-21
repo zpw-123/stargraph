@@ -1,0 +1,42 @@
+2023-02-14 07:28:24 INFO     Random seed: 0
+2023-02-14 07:28:26 INFO     Saving: log/fb15k-237/TripleRE/16-6.0/1676359704.533145
+2023-02-14 07:28:26 INFO     Model: TripleRE
+2023-02-14 07:28:26 INFO     Dataset: fb15k-237
+2023-02-14 07:28:26 INFO     #entity: 14505
+2023-02-14 07:28:26 INFO     #relation: 237
+2023-02-14 07:28:26 INFO     #train: 272115
+2023-02-14 07:28:26 INFO     #valid: 17526
+2023-02-14 07:28:26 INFO     #test: 20438
+2023-02-14 07:28:30 INFO     Model Parameter Configuration:
+2023-02-14 07:28:30 INFO     Parameter gamma: torch.Size([1]), require_grad = False
+2023-02-14 07:28:30 INFO     Parameter embedding_range: torch.Size([1]), require_grad = False
+2023-02-14 07:28:30 INFO     Parameter relation_embedding.weight: torch.Size([237, 48]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter anchor_embedding.weight: torch.Size([2305, 16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.norm1.weight: torch.Size([16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.norm1.bias: torch.Size([16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.norm2.weight: torch.Size([16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.norm2.bias: torch.Size([16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.attn.qk.weight: torch.Size([32, 16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.mlp.linear1.weight: torch.Size([32, 16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.mlp.linear1.bias: torch.Size([32]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.mlp.linear2.weight: torch.Size([16, 32]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter attn_layers.0.mlp.linear2.bias: torch.Size([16]), require_grad = True
+2023-02-14 07:28:30 INFO     Parameter path_embeddings.weight: torch.Size([475, 32]), require_grad = True
+2023-02-14 07:28:30 INFO     Total number of params: 65106
+2023-02-14 07:28:30 INFO     Ramdomly Initializing TripleRE Model...
+2023-02-14 07:28:32 INFO     Calculating sample weights...
+2023-02-14 07:28:37 INFO     Creating train dataloader...
+2023-02-14 07:28:41 INFO     Start Training...
+2023-02-14 07:28:41 INFO     init_step = 0
+2023-02-14 07:28:41 INFO     batch_size = 8
+2023-02-14 07:28:41 INFO     negative_adversarial_sampling = 1
+2023-02-14 07:28:41 INFO     hidden_dim = 16
+2023-02-14 07:28:41 INFO     gamma = 6.000000
+2023-02-14 07:28:41 INFO     negative_adversarial_sampling = True
+2023-02-14 07:28:41 INFO     adversarial_temperature = 2.000000
+2023-02-14 07:28:41 INFO     learning_rate = 0
+2023-02-14 07:28:46 INFO     
+
+2023-02-14 07:28:46 INFO     Train positive_sample_loss at step 0: 0.656181
+2023-02-14 07:28:46 INFO     Train negative_sample_loss at step 0: 1.762701
+2023-02-14 07:28:46 INFO     Train loss at step 0: 1.209441
