@@ -22,11 +22,15 @@ class KGEModel(nn.Module):
     def __init__(self, processor, args):
         super(KGEModel, self).__init__()
         self.model_name = args.model
+        self.negative_sample_size = args.negative_sample_size
         self.processor = processor
         self.nentity = processor.nentity
         self.nrelation = processor.nrelation
         self.epsilon = 2.0
         self.u = args.triplere_u
+        self.batch_size = args.batch_size
+
+        self.sum=0
 
         if self.model_name not in ['TransE', 'DistMult', 'ComplEx', 'RotatE', 'AutoSF', 'PairRE', 'TripleRE']:
             raise ValueError('model %s not supported' % self.model_name)
@@ -43,6 +47,9 @@ class KGEModel(nn.Module):
         elif self.model_name == 'TripleRE':
             self.entity_dim = args.hidden_dim
             self.relation_dim = args.hidden_dim * 3
+        else :
+            self.entity_dim = args.hidden_dim
+            self.relation_dim = args.hidden_dim
 
         self.gamma = nn.Parameter(
             torch.Tensor([args.gamma]),
@@ -450,13 +457,13 @@ class KGEModel(nn.Module):
         return vocab
 
 
-    def forward(self, head, relation, tail):
+    def forward(self, head, relation, tail,dataset='test'):
         head = self._encode_func(head)
         relation = self.relation_embedding(relation)
         tail = self._encode_func(tail)
 
         model_func = { # 'mode' is deprecated in this version of codes
-            # 'TransE': self.TransE,
+            'TransE': self.TransE,
             # 'DistMult': self.DistMult,
             # 'ComplEx': self.ComplEx,
             # 'RotatE': self.RotatE,
@@ -465,11 +472,38 @@ class KGEModel(nn.Module):
             'TripleRE': self.TripleRE,
         }
 
+        if dataset=='train':
+            if self.sum % 2==0:
+                score_tmp = model_func[self.model_name](head, relation, tail,'head-batch')
+                values,indices=torch.topk(score_tmp[:,1:],k=self.negative_sample_size,largest=True)
+                tail_new = tail[:,0:self.negative_sample_size+1,:]
+                for i in range(head.shape[0]):
+                    for j in range(self.negative_sample_size):
+                        tail_new[i,j+1,:]=tail[i,indices[i][j]+1,:]
+                tail = tail_new
+
+
+            else:
+                score_tmp = model_func[self.model_name](head, relation, tail,'tail-batch')
+                values,indices=torch.topk(score_tmp[:,1:],k=self.negative_sample_size,largest=True)
+                head_new = head[:,0:self.negative_sample_size+1,:]
+                for i in range(head.shape[0]):
+                    for j in range(self.negative_sample_size):
+                        head_new[i,j+1,:]=head[i,indices[i][j]+1,:]
+                head = head_new
+
+                
+
+        
+
         if self.model_name in model_func:
-            score = model_func[self.model_name](head, relation, tail)
+            if self.sum % 2==0:
+                score = model_func[self.model_name](head, relation, tail,'head-batch')
+            else:
+                score = model_func[self.model_name](head, relation, tail,'tail-batch')
         else:
             raise ValueError('model %s not supported' % self.model_name)
-
+        self.sum+=1
         return score
 
     def AutoSF(self, head, relation, tail, mode):

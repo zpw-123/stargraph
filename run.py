@@ -79,7 +79,7 @@ def parse_args(args=None):
     parser.add_argument('--anchor_size', default=0.1, type=float, help='size of the anchor set, i.e. |A|')
     parser.add_argument('-ancs', '--sample_anchors', default=20, type=int)
     parser.add_argument('-path', '--use_anchor_path', action='store_true')
-    parser.add_argument('-nbors', '--sample_neighbors', default=0, type=int)
+    parser.add_argument('-nbors', '--sample_neighbors', default=20, type=int)
     parser.add_argument('-center', '--sample_center', action='store_true')
     parser.add_argument('--node_dim', default=0, type=int)
     parser.add_argument('-merge', '--merge_strategy', default='mean_pooling', type=str,
@@ -145,7 +145,7 @@ def save_model(model, optimizer, save_variable_list, args):
         relation_embedding
     )
 
-def train(model, processor, args):
+def train(model, processor, args, caches):
     logging.info('Calculating sample weights...')
     if args.uni_weight:
         triple_weights = None
@@ -241,7 +241,7 @@ def train(model, processor, args):
             
         head, relation, tail, weight = batch
         # print(head.shape, relation.shape, tail.shape, weight.shape)
-        score = model(head, relation, tail)
+        score = model(head, relation, tail,'train')
         positive_score, negative_score = score[:,0], score[:,1:]
         # if head.shape[-1] < tail.shape[-1]:
         #     neg = tail[:,1:].clone()
@@ -501,6 +501,11 @@ def main(args):
     logging.info('#valid: %d' % len(processor.valid_triples))
     logging.info('#test: %d' % len(processor.test_triples))
 
+
+    #这里也已经被修改了
+    head_idx, tail_idx, head_cache, tail_cache, head_pos, tail_pos = processor.get_cache_list()
+    caches = [head_idx, tail_idx, head_cache, tail_cache, head_pos, tail_pos]
+
     model = KGEModel(
         processor=processor,
         args=args,
@@ -523,7 +528,7 @@ def main(args):
         logging.info('Ramdomly Initializing %s Model...' % args.model)
 
     if args.do_train:
-        train(model, processor, args)
+        train(model, processor, args, caches)
 
     if args.do_valid:
         logging.info('Evaluating on Valid Dataset...')

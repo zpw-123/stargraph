@@ -231,8 +231,8 @@ class Fb15k237_Processor(Processor):
             tail_idx.append(tail_cache[(h,r)])
         head_idx = np.array(head_idx, dtype=int)
         tail_idx = np.array(tail_idx, dtype=int)
-        head_cache = np.random.randint(low=0, high=self.nentity, size=(count_h, self.n_sample))#负采样个数了吧
-        tail_cache = np.random.randint(low=0, high=self.nentity, size=(count_t, self.n_sample))
+        head_cache = np.random.randint(low=0, high=self.nentity, size=(count_h, self.new_sample))#负采样个数了吧
+        tail_cache = np.random.randint(low=0, high=self.nentity, size=(count_t, self.new_sample))
         print('head/tail_idx: head/tail_cache', len(head_idx), len(tail_idx), head_cache.shape, tail_cache.shape, len(head_pos), len(tail_pos))
         return head_idx, tail_idx, head_cache, tail_cache, head_pos, tail_pos
 
@@ -265,6 +265,7 @@ class Fb15k237_Processor(Processor):
         self.test_triples = read_triple(os.path.join(data_path, 'test.txt'))
 
         #这里修改了
+        
 
 
 
