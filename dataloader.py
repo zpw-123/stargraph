@@ -54,14 +54,14 @@ class TrainDataset(Dataset):
         if self.true_triples is None:
             negative_sample.append(torch.randint(lower_bound, upper_bound, (self.negative_sample_size,)))
         else:
-            tmp_size = 0
-            while tmp_size < self.negative_sample_size:
-                tmp_sample = torch.randint(lower_bound, upper_bound, (self.negative_sample_size*2,))
+            tmp_size = 0   #获得三倍的负采样样本
+            while tmp_size < self.negative_sample_size*3: 
+                tmp_sample = torch.randint(lower_bound, upper_bound, (self.negative_sample_size*6,))
                 mask = torch.isin(tmp_sample, self.true_triples[(e1,r)], assume_unique=True, invert=True)
                 tmp_sample = tmp_sample[mask]
                 tmp_size += tmp_sample.shape[0]
                 negative_sample.append(tmp_sample)
-        negative_sample = torch.cat(negative_sample)[:self.negative_sample_size+1]
+        negative_sample = torch.cat(negative_sample)[:self.negative_sample_size*3+1]
         
         if self.mode == 'head-batch':
             head = negative_sample
